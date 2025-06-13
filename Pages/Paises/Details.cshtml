@@ -1,0 +1,37 @@
+﻿@page
+@model AgenciaTurismo.Pages.Paises.DetailsModel
+
+@{
+	ViewData["Title"] = "Detalhes do País";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+	<h4>País de Destino</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.PaisDestino.Nome)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.PaisDestino.Nome)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.PaisDestino.CodigoISO)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.PaisDestino.CodigoISO)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.PaisDestino.Continente)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.PaisDestino.Continente)
+		</dd>
+	</dl>
+</div>
+<div>
+	<a asp-page="./Edit" asp-route-id="@Model.PaisDestino.Id" class="btn btn-primary">Editar</a> |
+	<a asp-page="./Index" class="btn btn-secondary">Voltar para Lista</a>
+</div>

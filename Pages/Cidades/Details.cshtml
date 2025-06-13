@@ -1,0 +1,30 @@
+﻿@page
+@model AgenciaTurismo.Pages.Cidades.DetailsModel
+
+@{
+	ViewData["Title"] = "Detalhes da Cidade";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+	<h4>Cidade de Destino</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">@Html.DisplayNameFor(model => model.CidadeDestino.Nome)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(model => model.CidadeDestino.Nome)</dd>
+        
+		<dt class="col-sm-2">@Html.DisplayNameFor(model => model.CidadeDestino.Estado)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(model => model.CidadeDestino.Estado)</dd>
+        
+		<dt class="col-sm-2">@Html.DisplayNameFor(model => model.CidadeDestino.Descricao)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(model => model.CidadeDestino.Descricao)</dd>
+
+		<dt class="col-sm-2">@Html.DisplayNameFor(model => model.CidadeDestino.PaisDestino)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(model => model.CidadeDestino.PaisDestino.Nome)</dd>
+	</dl>
+</div>
+<div>
+	<a asp-page="./Edit" asp-route-id="@Model.CidadeDestino.Id" class="btn btn-primary">Editar</a> |
+	<a asp-page="./Index" class="btn btn-secondary">Voltar para Lista</a>
+</div>

@@ -1,0 +1,43 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Página Inicial";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bem-vindo à Agência de Turismo</h1>
+    <p class="lead">Sistema de gerenciamento de pacotes turísticos e reservas</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Clientes</h5>
+                <p class="card-text">Gerencie o cadastro de clientes da agência</p>
+                <a asp-page="/Clientes/Index" class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Pacotes Turísticos</h5>
+                <p class="card-text">Crie e gerencie pacotes de viagem</p>
+                <a asp-page="/Pacotes/Index" class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Reservas</h5>
+                <p class="card-text">Controle as reservas dos clientes</p>
+                <a asp-page="/Reservas/Index" class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+</div>
+

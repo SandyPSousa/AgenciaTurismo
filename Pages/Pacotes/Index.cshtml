@@ -1,0 +1,38 @@
+﻿@page
+@model AgenciaTurismo.Pages.Pacotes.IndexModel
+
+@{
+	ViewData["Title"] = "Pacotes Turísticos";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+	<a asp-page="Create" class="btn btn-success">Cadastrar Novo Pacote</a>
+</p>
+<table class="table table-striped">
+	<thead>
+	<tr>
+		<th>@Html.DisplayNameFor(model => model.PacoteTuristico[0].Titulo)</th>
+		<th>@Html.DisplayNameFor(model => model.PacoteTuristico[0].DataInicio)</th>
+		<th>@Html.DisplayNameFor(model => model.PacoteTuristico[0].DuracaoDias)</th>
+		<th>@Html.DisplayNameFor(model => model.PacoteTuristico[0].Preco)</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model.PacoteTuristico) {
+		<tr>
+			<td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+			<td>@Html.DisplayFor(modelItem => item.DataInicio)</td>
+			<td>@Html.DisplayFor(modelItem => item.DuracaoDias)</td>
+			<td>@item.Preco.ToString("C")</td>
+			<td>
+				<a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info">Editar</a> |
+				<a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Detalhes</a> |
+				<a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Excluir</a>
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>

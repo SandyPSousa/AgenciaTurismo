@@ -1,0 +1,29 @@
+﻿@page
+@model AgenciaTurismo.Pages.Reservas.DetailsModel
+
+@{
+	ViewData["Title"] = "Detalhes da Reserva";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+	<h4>Reserva</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">@Html.DisplayNameFor(model => model.Reserva.Cliente)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(model => model.Reserva.Cliente.Nome)</dd>
+        
+		<dt class="col-sm-2">@Html.DisplayNameFor(model => model.Reserva.PacoteTuristico)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(model => model.Reserva.PacoteTuristico.Titulo)</dd>
+        
+		<dt class="col-sm-2">@Html.DisplayNameFor(model => model.Reserva.DataReserva)</dt>
+		<dd class="col-sm-10">@Model.Reserva.DataReserva.ToLocalTime().ToString("F")</dd>
+        
+		<dt class="col-sm-2">@Html.DisplayNameFor(model => model.Reserva.ValorTotal)</dt>
+		<dd class="col-sm-10">@Model.Reserva.ValorTotal.ToString("C")</dd>
+	</dl>
+</div>
+<div>
+	<a asp-page="./Index" class="btn btn-secondary">Voltar para Lista</a>
+</div>

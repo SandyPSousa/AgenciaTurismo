@@ -1,0 +1,76 @@
+﻿@page
+@model AgenciaTurismo.Pages.Pacotes.CreateModel
+
+@{
+    ViewData["Title"] = "Cadastrar Pacote Turístico";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<form method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-2">
+                <label asp-for="PacoteTuristico.Titulo" class="control-label"></label>
+                <input asp-for="PacoteTuristico.Titulo" class="form-control" />
+                <span asp-validation-for="PacoteTuristico.Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="PacoteTuristico.Descricao" class="control-label"></label>
+                <textarea asp-for="PacoteTuristico.Descricao" class="form-control"></textarea>
+                <span asp-validation-for="PacoteTuristico.Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="PacoteTuristico.DataInicio" class="control-label"></label>
+                <input asp-for="PacoteTuristico.DataInicio" class="form-control" />
+                <span asp-validation-for="PacoteTuristico.DataInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="PacoteTuristico.DuracaoDias" class="control-label"></label>
+                <input asp-for="PacoteTuristico.DuracaoDias" class="form-control" />
+                <span asp-validation-for="PacoteTuristico.DuracaoDias" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="PacoteTuristico.CapacidadeMaxima" class="control-label"></label>
+                <input asp-for="PacoteTuristico.CapacidadeMaxima" class="form-control" />
+                <span asp-validation-for="PacoteTuristico.CapacidadeMaxima" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="PacoteTuristico.Preco" class="control-label"></label>
+                <input asp-for="PacoteTuristico.Preco" class="form-control" />
+                <span asp-validation-for="PacoteTuristico.Preco" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label"><strong>Selecione os Destinos</strong></label>
+                <div class="p-3 border rounded" style="max-height: 400px; overflow-y: auto;">
+                    @for (var i = 0; i < Model.AssignedCidadesDataList.Count; i++)
+                    {
+                        <div class="form-check">
+                            <input type="checkbox"
+                                   class="form-check-input"
+                                   name="selectedCidades"
+                                   value="@Model.AssignedCidadesDataList[i].CidadeID"
+                                   id="cidade_@Model.AssignedCidadesDataList[i].CidadeID" />
+                            <label class="form-check-label" for="cidade_@Model.AssignedCidadesDataList[i].CidadeID">
+                                @Model.AssignedCidadesDataList[i].Nome
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <input type="submit" value="Salvar" class="btn btn-primary" />
+        <a asp-page="Index" class="btn btn-secondary">Voltar para Lista</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,65 @@
+﻿@page
+@model AgenciaTurismo.Pages.Clientes.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    
+}
+
+<h1>Adicionar novo cliente</h1>
+
+<h4>Cliente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Cliente.Nome" class="control-label"></label>
+                <input asp-for="Cliente.Nome" class="form-control" />
+                <span asp-validation-for="Cliente.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Cliente.Email" class="control-label"></label>
+                <input asp-for="Cliente.Email" class="form-control" />
+                <span asp-validation-for="Cliente.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Cliente.CPF" class="control-label"></label>
+                <input asp-for="Cliente.CPF" class="form-control" />
+                <span asp-validation-for="Cliente.CPF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cliente.Telefone" class="control-label"></label>
+                <input asp-for="Cliente.Telefone" class="form-control" />
+                <span asp-validation-for="Cliente.Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cliente.DataNascimento" class="control-label"></label>
+                <input asp-for="Cliente.DataNascimento" class="form-control" />
+                <span asp-validation-for="Cliente.DataNascimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cliente.DeletedAt" class="control-label"></label>
+                <input asp-for="Cliente.DeletedAt" class="form-control" />
+                <span asp-validation-for="Cliente.DeletedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Adicionar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+				

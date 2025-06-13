@@ -1,0 +1,36 @@
+﻿@page
+@model AgenciaTurismo.Pages.Cidades.IndexModel
+
+@{
+	ViewData["Title"] = "Lista de Cidades";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+	<a asp-page="Create" class="btn btn-success">Cadastrar Nova Cidade</a>
+</p>
+<table class="table table-striped">
+	<thead>
+	<tr>
+		<th>@Html.DisplayNameFor(model => model.CidadeDestino[0].Nome)</th>
+		<th>@Html.DisplayNameFor(model => model.CidadeDestino[0].Estado)</th>
+		<th>@Html.DisplayNameFor(model => model.CidadeDestino[0].PaisDestino)</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model.CidadeDestino) {
+		<tr>
+			<td>@Html.DisplayFor(modelItem => item.Nome)</td>
+			<td>@Html.DisplayFor(modelItem => item.Estado)</td>
+			<td>@Html.DisplayFor(modelItem => item.PaisDestino.Nome)</td>
+			<td>
+				<a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info">Editar</a> |
+				<a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Detalhes</a> |
+				<a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Excluir</a>
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>

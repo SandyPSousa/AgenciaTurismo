@@ -1,0 +1,86 @@
+﻿@page
+@model AgenciaTurismo.Pages.Notes.ViewNotesModel
+@{
+    ViewData["Title"] = "Sistema de Notas";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h4>Criar Nova Nota</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group mb-3">
+                        <label asp-for="TituloNota" class="control-label">Título da Nota</label>
+                        <input asp-for="TituloNota" class="form-control" required />
+                        <span asp-validation-for="TituloNota" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="ConteudoNota" class="control-label">Conteúdo</label>
+                        <textarea asp-for="ConteudoNota" class="form-control" rows="5" required></textarea>
+                        <span asp-validation-for="ConteudoNota" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Salvar Nota</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Arquivos Disponíveis</h4>
+            </div>
+            <div class="card-body">
+                @if (Model.ArquivosDisponiveis.Any())
+                {
+                    <div class="list-group">
+                        @foreach (var arquivo in Model.ArquivosDisponiveis)
+                        {
+                            <a href="?arquivo=@arquivo"
+                               class="list-group-item list-group-item-action @(Model.ArquivoSelecionado == arquivo ? "active" : "")">
+                                @arquivo
+                            </a>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p>Nenhum arquivo encontrado.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        @if (!string.IsNullOrEmpty(Model.ArquivoSelecionado))
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h4>Conteúdo: @Model.ArquivoSelecionado</h4>
+                </div>
+                <div class="card-body">
+                    <pre class="border p-3 bg-light">@Model.ConteudoArquivo</pre>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

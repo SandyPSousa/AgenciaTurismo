@@ -1,0 +1,100 @@
+﻿@page "{id:int}"
+@model AgenciaTurismo.Pages.Pacotes.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalhes do Pacote";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>@Model.PacoteTuristico.Titulo</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-header"><h5>Informações do Pacote</h5></div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PacoteTuristico.Descricao)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.PacoteTuristico.Descricao)</dd>
+
+                        <dt class="col-sm-3">Período</dt>
+                        <dd class="col-sm-9">@Model.PacoteTuristico.DataInicio.ToString("dd/MM/yyyy") até @Model.PacoteTuristico.DataTermino.ToString("dd/MM/yyyy") (@Model.PacoteTuristico.DuracaoDias dias)</dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PacoteTuristico.Preco)</dt>
+                        <dd class="col-sm-9">@Model.PacoteTuristico.Preco.ToString("C")</dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PacoteTuristico.Inclusoes)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.PacoteTuristico.Inclusoes)</dd>
+
+                        <dt class="col-sm-3">Capacidade</dt>
+                        <dd class="col-sm-9">
+                            @Model.PacoteTuristico.VagasDisponiveis de @Model.PacoteTuristico.CapacidadeMaxima vagas disponíveis
+                            @if (!Model.PacoteTuristico.EstaDisponivel)
+                            {
+                                <span class="badge bg-danger">Indisponível</span>
+                            }
+                            else if (Model.PacoteTuristico.VagasDisponiveis < 5)
+                            {
+
+                                <span class="badge bg-warning text-dark">Poucas vagas!</span>
+                            }
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            @* Bloco de Destinos Incluídos *@
+            <div class="card mb-3">
+                <div class="card-header"><h5>Destinos Incluídos</h5></div>
+                <div class="card-body">
+                    @if (Model.PacoteTuristico.PacoteTuristicoDestinos != null && Model.PacoteTuristico.PacoteTuristicoDestinos.Any())
+                    {
+                        <ol>
+                            @foreach (var destino in Model.PacoteTuristico.PacoteTuristicoDestinos.OrderBy(d => d.OrdemVisita))
+                            {
+                                <li><strong>@destino.CidadeDestino.Nome</strong> - @destino.CidadeDestino.Estado, @destino.CidadeDestino.PaisDestino.Nome</li>
+                            }
+                        </ol>
+                    }
+                    else
+                    {
+
+                        <p>Nenhum destino cadastrado para este pacote.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        @* Bloco de Reservas *@
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header"><h5>Reservas Confirmadas (@Model.PacoteTuristico.Reservas.Count(r => r.DeletedAt == null))</h5></div>
+                <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                    @if (Model.PacoteTuristico.Reservas != null && Model.PacoteTuristico.Reservas.Any(r => r.DeletedAt == null))
+                    {
+                        <ul class="list-unstyled">
+                            @foreach (var reserva in Model.PacoteTuristico.Reservas.Where(r => r.DeletedAt == null).OrderByDescending(r => r.DataReserva))
+                            {
+                                <li class="mb-2">
+                                    <strong>@reserva.Cliente.Nome</strong><br />
+                                    <small>Reservado em: @reserva.DataReserva.ToString("dd/MM/yyyy HH:mm")</small>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+
+                        <p>Ainda não há reservas para este pacote.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-3">
+        <a asp-page="./Edit" asp-route-id="@Model.PacoteTuristico.Id" class="btn btn-warning">Editar</a>
+        <a asp-page="./Index" class="btn btn-secondary">Voltar para Lista</a>
+    </div>
+</div>

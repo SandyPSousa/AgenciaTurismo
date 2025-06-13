@@ -1,0 +1,58 @@
+﻿@page
+@model AgenciaTurismo.Pages.Delegates.CalculoDescontoModel
+@{
+    ViewData["Title"] = "Cálculo de Desconto";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Calcular Desconto em Pacote Turístico</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group mb-3">
+                        <label asp-for="ValorOriginal" class="control-label">Valor Original (R$)</label>
+                        <input asp-for="ValorOriginal" class="form-control" type="number" step="0.01" min="0" />
+                        <span asp-validation-for="ValorOriginal" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="PercentualDesconto" class="control-label">Percentual de Desconto (%)</label>
+                        <input asp-for="PercentualDesconto" class="form-control" type="number" step="0.01" min="0" max="100" />
+                        <span asp-validation-for="PercentualDesconto" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Calcular Desconto</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        @if (Model.ValorComDesconto.HasValue)
+        {
+            <div class="card bg-success text-white">
+                <div class="card-header">
+                    <h4>Resultado do Cálculo</h4>
+                </div>
+                <div class="card-body">
+                    <p class="h5">Valor Original: <strong>R$ @Model.ValorOriginal.ToString("F2")</strong></p>
+                    <p class="h5">Desconto: <strong>@Model.PercentualDesconto%</strong></p>
+                    <hr />
+                    <p class="h3">Valor Final: <strong>R$ @Model.ValorComDesconto.Value.ToString("F2")</strong></p>
+                    <p class="h5 mt-3">Economia de: <strong>R$ @((Model.ValorOriginal - Model.ValorComDesconto.Value).ToString("F2"))</strong></p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
